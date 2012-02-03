@@ -1,0 +1,2 @@
+$("a.ajax-cart").prepend($("#loading").toggle());
+$('.quantity').html("<%= escape_javascript(@order.item_count.to_s) %>");

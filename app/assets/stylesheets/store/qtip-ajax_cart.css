@@ -1,0 +1,10 @@
+.quantity { float: left; }
+.min-ajax_cart { font-size: 8px; float: left; text-align: center; margin-left: 10px; }
+.max-ajax_cart { float: left; font-size: 11pt; margin-left: 5px; margin-top: 0; padding: 0; }
+.ui-tooltip-wiki { max-width: 500px; }
+.ui-tooltip-wiki .ui-tooltip-content { padding: 10px; line-height: 12.5px; }
+.ui-tooltip-wiki h3 { margin: 0 0 7px; font-size: 1.5em; line-height: 1em; }
+.ui-tooltip-wiki img { padding: 0 10px 0 0; }
+.ui-tooltip-wiki p { margin-bottom: 9px; }
+.ui-tooltip-wiki .note { margin-bottom: 0; font-style: italic; color: #888; }
+#loading { margin:auto; width: 100px; text-align: center; position: relative; overflow: visible; height: 40px; background: url(/assets/ajax-cart.gif) no-repeat; left: 280px; top:8px; }

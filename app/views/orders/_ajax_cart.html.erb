@@ -1,0 +1,69 @@
+<div id="cart">
+	<h3 id="cart-title" style="width: 660px;"><%= t(:shopping_cart) %></h3>
+
+	<% if current_order.line_items.empty? %>
+	<div data-hook="empty_cart">
+		<p><%= t(:your_cart_is_empty) %></p>
+		<p><%= link_to t(:continue_shopping), products_path, :class => 'button continue' %></p>
+	</div>
+
+	<% else %>
+	<div data-hook="outside_cart_form" id="outside_cart_form">
+
+		<div data-hook="inside_cart_form">
+			<div data-hook="cart_items">
+				<% current_order.line_items.each do |order_form| %>
+				<% variant = order_form.variant %>
+				<table id="cart-detail" data-hook>
+					<thead>
+						<tr data-hook="cart_items_headers">
+							<th colspan="2"><%= t(:item) %></th>
+							<th><%= t(:price) %></th>
+							<th><%= t(:qty) %></th>
+							<th><%= t(:total) %></th>
+
+						</tr>
+					</thead>
+					<tbody id="line_items" data-hook>
+						<tr class="<%= cycle('', 'alt') %>">
+							<td data-hook="cart_item_image">
+								<% if variant.images.length == 0 %>
+								<%= small_image(variant.product) %>
+								<% else %>
+								<%= image_tag variant.images.first.attachment.url(:small) %>
+								<% end %>
+							</td>
+							<td data-hook="cart_item_description">
+								<h4><%= link_to variant.product.name, product_path(variant.product) %></h4>
+								<%= variant.options_text %>
+
+
+								<%= truncate(strip_tags(variant.product.description), :length => 60, :omission => "...") %>
+							</td>
+							<td data-hook="cart_item_price">
+								<%= product_price(order_form.variant) %>
+							</td>
+							<td data-hook="cart_item_quantity">
+								<%= order_form.quantity %>
+							</td>
+							<td data-hook="cart_item_total">
+								<%= format_price(product_price(order_form.variant, :format_as_currency => false) * order_form.quantity) unless order_form.quantity.nil?%>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<% end %>
+			</div>
+
+			<div id="subtotal" data-hook>
+				<h3><%= "#{t(:subtotal)}: #{order_price(current_order)}" %></h3>
+				<div class="links" data-hook="cart_buttons">
+					<%= link_to "Procedi al carrello" , cart_path, :class => 'button checkout primary', :id => 'checkout-link' %>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<% end %>
+</div>
