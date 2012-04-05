@@ -1,7 +1,7 @@
 <div id="cart">
 	<h3 id="cart-title" style="width: 660px;"><%= t(:shopping_cart) %></h3>
 
-	<% if current_order.line_items.empty? %>
+	<% if current_order.empty? && current_order.line_items.empty? %>
 	<div data-hook="empty_cart">
 		<p><%= t(:your_cart_is_empty) %></p>
 		<p><%= link_to t(:continue_shopping), products_path, :class => 'button continue' %></p>
@@ -28,9 +28,9 @@
 						<tr class="<%= cycle('', 'alt') %>">
 							<td data-hook="cart_item_image">
 								<% if variant.images.length == 0 %>
-								<%= small_image(variant.product) %>
+								<%= mini_image(variant.product) %>
 								<% else %>
-								<%= image_tag variant.images.first.attachment.url(:small) %>
+								<%= image_tag variant.images.first.attachment.url(:mini) %>
 								<% end %>
 							</td>
 							<td data-hook="cart_item_description">
@@ -38,7 +38,7 @@
 								<%= variant.options_text %>
 
 
-								<%= truncate(strip_tags(variant.product.description), :length => 60, :omission => "...") %>
+								<%= truncate(strip_tags(variant.product.description), :length => 30, :omission => "...") %>
 							</td>
 							<td data-hook="cart_item_price">
 								<%= product_price(order_form.variant) %>
