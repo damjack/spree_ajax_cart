@@ -10,7 +10,8 @@ Gem::Specification.new do |s|
   s.email             = 'damiano.giacomello@diginess.it'
   # s.rubyforge_project = 'actionmailer'
 
-  s.files        = Dir['CHANGELOG', 'README.md', 'LICENSE', 'lib/**/*', 'app/**/*']
+  #s.files         = `git ls-files`.split("\n")
+  s.files        = Dir['CHANGELOG', 'README.md', 'LICENSE', 'lib/**/*', 'app/**/*', 'db/**/*', 'config/**/*']
   s.require_path = 'lib'
   s.requirements << 'none'
 

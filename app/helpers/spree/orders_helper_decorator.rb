@@ -1,4 +1,4 @@
-OrdersHelper.module_eval do
+Spree::OrdersHelper.module_eval do
   
   def cart_item_count
     return "" if current_page?(cart_path)
