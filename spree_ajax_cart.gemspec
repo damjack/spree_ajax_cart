@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_ajax_cart'
-  s.version     = '1.0.0'
+  s.version     = '1.0.1'
   s.summary     = 'Add link_to_ajax_cart helper for Spree'
   s.required_ruby_version = '>= 1.8.7'
 
