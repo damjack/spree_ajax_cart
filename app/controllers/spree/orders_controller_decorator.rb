@@ -3,7 +3,7 @@ Spree::OrdersController.class_eval do
   respond_override :populate => { :js => { :success => lambda { render "populate" ,:object => @order } } }
 
   def ajax_cart
-    render :partial => 'orders/ajax_cart'
+    render :partial => 'spree/orders/ajax_cart'
   end
 
 end

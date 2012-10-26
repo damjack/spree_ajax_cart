@@ -1,7 +1,7 @@
 <div id="cart">
 	<h3 id="cart-title" style="width: 660px;"><%= t(:shopping_cart) %></h3>
 
-	<% if current_order.empty? && current_order.line_items.empty? %>
+	<% if !current_order && current_order.empty? && current_order.line_items.empty? %>
 	<div data-hook="empty_cart">
 		<p><%= t(:your_cart_is_empty) %></p>
 		<p><%= link_to t(:continue_shopping), products_path, :class => 'button continue' %></p>
@@ -12,8 +12,8 @@
 
 		<div data-hook="inside_cart_form">
 			<div data-hook="cart_items">
-				<% current_order.line_items.each do |order_form| %>
-				<% variant = order_form.variant %>
+				<% current_order.line_items.each do |line_item| %>
+				<% variant = line_item.variant %>
 				<table id="cart-detail" data-hook>
 					<thead>
 						<tr data-hook="cart_items_headers">
@@ -41,13 +41,13 @@
 								<%= truncate(strip_tags(variant.product.description), :length => 30, :omission => "...") %>
 							</td>
 							<td data-hook="cart_item_price">
-								<%= product_price(order_form.variant) %>
+								<%= money(line_item.price) %>
 							</td>
 							<td data-hook="cart_item_quantity">
-								<%= order_form.quantity %>
+								<%= line_item.quantity %>
 							</td>
 							<td data-hook="cart_item_total">
-								<%= format_price(product_price(order_form.variant, :format_as_currency => false) * order_form.quantity) unless order_form.quantity.nil?%>
+								<%= money(line_item.price * line_item.quantity) unless line_item.quantity.nil?%>
 							</td>
 						</tr>
 					</tbody>
@@ -56,7 +56,7 @@
 			</div>
 
 			<div id="subtotal" data-hook>
-				<h3><%= "#{t(:subtotal)}: #{order_price(current_order)}" %></h3>
+				<h3><%= "#{t(:subtotal)}: #{money(current_order.item_total)}" if current_order %></h3>
 				<div class="links" data-hook="cart_buttons">
 					<%= link_to "Procedi al carrello" , cart_path, :class => 'button checkout primary', :id => 'checkout-link' %>
 				</div>
